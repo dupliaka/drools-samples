@@ -1,18 +1,32 @@
 package org.example.discountchecker;
 
-import org.drools.core.reteoo.ReteDumper;
 import org.example.discountchecker.model.Person;
 import org.kie.api.KieServices;
-import org.kie.api.event.rule.DebugAgendaEventListener;
-import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.List;
+
 public class DiscountCheckerApp {
+    private static final List<Person> personList = List.of(
+            new Person("Elon Mask", LocalDate.of(1971, Month.JULY, 28)),
+            new Person("Jeff Bezos", LocalDate.of(1964, Month.JANUARY, 12)),
+            new Person("Mark Zuckerberg", LocalDate.of(1984, Month.MAY, 14)),
+            new Person("Tim Cook", LocalDate.of(1960, Month.NOVEMBER, 1)),
+            new Person("Sundar Pichai", LocalDate.of(1972, Month.JULY, 12)),
+            new Person("Satya Nadella", LocalDate.of(1967, Month.AUGUST, 19)),
+            new Person("Larry Page", LocalDate.of(1973, Month.MARCH, 26)),
+            new Person("Sergey Brin", LocalDate.of(1973, Month.AUGUST, 21)),
+            new Person("Jack Dorsey", LocalDate.of(1976, Month.NOVEMBER, 19)),
+            new Person("Reed Hastings", LocalDate.of(1960, Month.OCTOBER, 8)));
 
     public static void main(String[] args) {
+        DiscountCheckerApp.runDroolsDiscountCheck();
+    }
 
-        System.setProperty("drools.metric.logger.enabled", "true");
+    public static void runDroolsDiscountCheck() {
 
         // Create a KieServices instance
         KieServices kieServices = KieServices.Factory.get();
@@ -23,27 +37,23 @@ public class DiscountCheckerApp {
         // Create a KieSession
         KieSession kSession = kContainer.newKieSession();
 
-        // Create a Person object
-        Person person = new Person("John", 30);
-
-        System.out.println("======= dumpRete output");
-        ReteDumper.dumpRete(kSession);
-        System.out.println("=======");
-
-        // Insert the Person object into the KieSession
-        kSession.insert(person);
+        // Insert the Person objects into the KieSession
+        personList.forEach(kSession::insert);
 
         // Fire the rules
         kSession.fireAllRules();
 
+        // Output the results
+        personList.forEach(p -> {
+            if (p.isDiscountEligible()) {
+                System.out.println(p.getName() + " is eligible for the discount");
+            } else {
+                System.out.println(p.getName() + " is not eligible for the discount");
+            }
+        });
+
         // Close the KieSession
         kSession.dispose();
-
-        // Check if the person is eligible for a discount
-        if (person.isDiscountEligible()) {
-            System.out.println(person.getName() + " is eligible for a discount.");
-        } else {
-            System.out.println(person.getName() + " is not eligible for a discount.");
-        }
     }
+
 }

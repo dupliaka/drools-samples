@@ -2,7 +2,7 @@ import org.example.discountchecker.model.Person
 
 rule "Discount Eligibility Rule"
 when
-    $person: Person(age >= 18)
+    $person: Person(age >= 60)
 then
     $person.setDiscountEligible(true);
 end

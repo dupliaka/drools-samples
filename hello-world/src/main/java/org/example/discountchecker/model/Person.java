@@ -1,15 +1,18 @@
 package org.example.discountchecker.model;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class Person {
     private String name;
-    private int age;
+    private LocalDate birthDate;
     private boolean discountEligible;
 
     // Constructor, getters, and setters
 
-    public Person(String name, int age) {
+    public Person(String name, LocalDate birthDate) {
         this.name = name;
-        this.age = age;
+        this.birthDate = birthDate;
     }
 
     public String getName() {
@@ -26,7 +29,7 @@ public class Person {
     }
 
     public int getAge() {
-        return age;
+        return Period.between(this.birthDate, LocalDate.now()).getYears();
     }
 
     // Other methods and properties
