@@ -1,9 +1,8 @@
 name: Continuous Integration
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -17,6 +16,9 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 11
+          distribution: jdk
 
       - name: Build Drools Samples
         run: mvn clean install
+
+        
