@@ -9,7 +9,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.drools.*" level="trace"/>
+    <logger name="org.drools" level="trace"/>
     <logger name="org.drools.metric.util.MetricLogUtils" level="trace"/>
 
     <root level="trace">
