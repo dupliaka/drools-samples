@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v3.12.0
         with: 
           java-version: 11
-          distribution: jdk
+          distribution: temurin
 
       - name: Build Drools Samples
         run: mvn clean install
