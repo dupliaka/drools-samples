@@ -3,8 +3,7 @@ package org.example.discountchecker;
 import org.drools.core.reteoo.ReteDumper;
 import org.example.discountchecker.model.Person;
 import org.kie.api.KieServices;
-import org.kie.api.event.rule.DebugAgendaEventListener;
-import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
+import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
@@ -13,6 +12,7 @@ import java.time.Month;
 import java.util.List;
 
 public class DiscountCheckerApp {
+
     static final List<Person> personList = List.of(
             new Person("Elon Mask", LocalDate.of(1971, Month.JULY, 28)),
             new Person("Jeff Bezos", LocalDate.of(1964, Month.JANUARY, 12)),
@@ -40,9 +40,11 @@ public class DiscountCheckerApp {
         // Create a KieSession
         KieSession kSession = kContainer.newKieSession();
 
-        kSession.addEventListener(new DebugAgendaEventListener());
-        kSession.addEventListener(new DebugRuleRuntimeEventListener());
+        //Log rule events
+        KieRuntimeLogger logger =
+                KieServices.Factory.get().getLoggers().newConsoleLogger(kSession);
 
+        //Show created Rete network
         ReteDumper.dumpRete(kSession);
 
         // Insert the Person objects into the KieSession
@@ -51,6 +53,7 @@ public class DiscountCheckerApp {
         // Fire the rules
         kSession.fireAllRules();
 
+        System.out.println("=======Eligibility list=========");
         // Output the results
         personList.forEach(p -> {
             if (p.isDiscountEligible()) {
@@ -62,6 +65,7 @@ public class DiscountCheckerApp {
 
         // Close the KieSession
         kSession.dispose();
+        logger.close();
     }
 
 }
