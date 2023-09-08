@@ -1,7 +1,6 @@
 package org.example.discountchecker;
 
 import org.example.discountchecker.model.Person;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,16 +13,16 @@ class DiscountCheckerAppTest {
 
     @Test
     void runDroolsDiscountCheck() {
+        final List<String> personOver60 = List.of("Tim Cook", "Reed Hastings");
+
         DiscountCheckerApp.runDroolsDiscountCheck();
+
         List<String> eligiglePersonList = DiscountCheckerApp.personList.stream()
                 .filter(Person::isDiscountEligible)
                 .map(Person::getName)
                 .collect(Collectors.toList());
-        List<String> personOver60 = List.of("Tim Cook", "Reed Hastings");
 
         assertTrue(eligiglePersonList.containsAll(personOver60));
-
-        // Check that the sizes of the lists are equal
         assertEquals(eligiglePersonList.size(), personOver60.size());
     }
 }

@@ -40,8 +40,8 @@ public class DiscountCheckerApp {
         // Create a KieSession
         KieSession kSession = kContainer.newKieSession();
 
-        kSession.addEventListener( new DebugAgendaEventListener() );
-        kSession.addEventListener( new DebugRuleRuntimeEventListener() );
+        kSession.addEventListener(new DebugAgendaEventListener());
+        kSession.addEventListener(new DebugRuleRuntimeEventListener());
 
         ReteDumper.dumpRete(kSession);
 

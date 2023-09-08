@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class Person {
-    private String name;
-    private LocalDate birthDate;
+    private final String name;
+    private final LocalDate birthDate;
     private boolean discountEligible;
 
     // Constructor, getters, and setters

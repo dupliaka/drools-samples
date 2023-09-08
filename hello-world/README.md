@@ -1,10 +1,12 @@
 # Drools Rule Engine Example
 
-This is a simple Java application that demonstrates how to use the Drools rule engine to determine if a person is eligible for a discount based on their age.
+This is a simple Java application that demonstrates how to use the Drools rule engine to determine if a person is
+eligible for a discount based on their age.
 
 ## Project Structure
 
 The project structure looks like this:
+
 ```
 .
 ├── pom.xml
