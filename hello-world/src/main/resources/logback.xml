@@ -9,7 +9,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.drools" level="ERROR"/>
+    <logger name="org.drools" level="error"/>
 
     <root level="error">
         <appender-ref ref="consoleAppender"/>
