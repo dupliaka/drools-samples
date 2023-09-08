@@ -1,7 +1,10 @@
 package org.example.discountchecker;
 
+import org.drools.core.reteoo.ReteDumper;
 import org.example.discountchecker.model.Person;
 import org.kie.api.KieServices;
+import org.kie.api.event.rule.DebugAgendaEventListener;
+import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
@@ -10,7 +13,7 @@ import java.time.Month;
 import java.util.List;
 
 public class DiscountCheckerApp {
-    private static final List<Person> personList = List.of(
+    static final List<Person> personList = List.of(
             new Person("Elon Mask", LocalDate.of(1971, Month.JULY, 28)),
             new Person("Jeff Bezos", LocalDate.of(1964, Month.JANUARY, 12)),
             new Person("Mark Zuckerberg", LocalDate.of(1984, Month.MAY, 14)),
@@ -36,6 +39,11 @@ public class DiscountCheckerApp {
 
         // Create a KieSession
         KieSession kSession = kContainer.newKieSession();
+
+        kSession.addEventListener( new DebugAgendaEventListener() );
+        kSession.addEventListener( new DebugRuleRuntimeEventListener() );
+
+        ReteDumper.dumpRete(kSession);
 
         // Insert the Person objects into the KieSession
         personList.forEach(kSession::insert);
