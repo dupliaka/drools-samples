@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- In this way the kmodule will contain one single default KieBase. -->
+<!-- All Kie assets stored under the resources folder, or any of its subfolders, will be compiled and added to it.-->
+<!-- To trigger the building of these artifacts it is enough to create a KieContainer for them.-->
+
+<kmodule xmlns="http://www.drools.org/xsd/kmodule"/>
+

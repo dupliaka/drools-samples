@@ -9,9 +9,13 @@
         </encoder>
     </appender>
 
-    <logger name="org.drools" level="error"/>
 
-    <root level="error">
+    <logger name="org.kie" level="trace"/>
+    <logger name="org.drools.compiler.kie.builder.impl" level="trace" />
+    <logger name="org.drools" level="trace"/>
+    <logger name="org.drools.metric.util.MetricLogUtils" level="trace"/>
+
+    <root level="trace">
         <appender-ref ref="consoleAppender"/>
     </root>
 
